@@ -33,10 +33,10 @@ Route::post('/movie', function () use ($movies) {
 });
 
 
-Route::put('/movie', function () use ($movies) {
-    $movies[2]['title'] = request('title');
-    $movies[2]['year'] = request('year');
-    $movies[2]['genre'] = request('genre');
+Route::put('/movie/{id}', function ($id) use ($movies) {
+    $movies[$id]['title'] = request('title');
+    $movies[$id]['year'] = request('year');
+    $movies[$id]['genre'] = request('genre');
 
     return $movies;
 });
