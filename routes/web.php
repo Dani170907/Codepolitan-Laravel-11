@@ -25,7 +25,7 @@ Route::get('/movie', function () use ($movies) {
 
 Route::get('/movie/{id}', function ($id) use ($movies) {
     return $movies[$id];
-})->middleware(CheckMembership::class);
+})->middleware('isMember');
 
 
 Route::post('/movie', function () use ($movies) {
