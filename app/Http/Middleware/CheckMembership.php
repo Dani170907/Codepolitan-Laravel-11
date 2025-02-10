@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Container\Attributes\Log;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,6 +20,20 @@ class CheckMembership
             return redirect('/pricing');
         }
 
-        return $next($request);
+        \Illuminate\Support\Facades\Log::info('Before Request:', [
+            'url' => $request->url(),
+            'params' => $request->all(),
+        ]);
+
+        $response = $next($request);
+
+        sleep(2);
+
+        \Illuminate\Support\Facades\Log::info('After Request:', [
+            'status' => $response->getStatusCode(),
+            'content' => $response->getContent(),
+        ]);
+
+        return $response;
     }
 }
