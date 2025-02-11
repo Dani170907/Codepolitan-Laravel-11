@@ -25,7 +25,7 @@ Route::get('/movie', function () use ($movies) {
 
 Route::get('/movie/{id}', function ($id) use ($movies) {
     return $movies[$id];
-})->middleware('isMember');
+})->middleware(['isAuth', 'isMember']);
 
 
 Route::post('/movie', function () use ($movies) {
@@ -66,3 +66,7 @@ Route::delete('/movie/{id}', function ($id) use ($movies) {
 Route::get('/pricing', function () {
     return 'Please, buy a membership';
 });
+
+Route::get('/login', function (){
+    return 'Login page';
+})->name('login-page');
