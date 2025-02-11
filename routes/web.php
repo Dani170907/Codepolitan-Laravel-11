@@ -69,4 +69,4 @@ Route::get('/pricing', function () {
 
 Route::get('/login', function (){
     return 'Login page';
-})->name('login-page');
+})->name('login');
