@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Middleware\CheckMembership;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,60 +12,69 @@ for ($i = 0; $i <= 5; $i++) {
     $movies[] = [
         'title' => 'Movie ' . $i,
         'year' => '2020',
-        'genre' => 'Comedi',
+        'genre' => 'Comedy',
     ];
 }
 
-Route::get('/movie', function () use ($movies) {
+Route::group(
+    [
+        'middlware' => ['IsAuth'],
+        'prefix' => 'movie',
+        'as' => 'movie.',
+    ],
+    function () use ($movies) {
 
-    return $movies;
-});
+        Route::get('/', function () use ($movies) {
+            return $movies;
+        });
 
+        Route::get('/{id}', function ($id) use ($movies) {
+            return $movies[$id];
+        })->middleware(['isMember']);
 
-Route::get('/movie/{id}', function ($id) use ($movies) {
-    return $movies[$id];
-})->middleware(['isAuth', 'isMember']);
+        Route::post('/', function () use ($movies) {
+            $movies[] = [
+                'title' => request('title'),
+                'year' => request('year'),
+                'genre' => request('genre'),
+            ];
 
-
-Route::post('/movie', function () use ($movies) {
-    $movies[] = [
-        'title' => request('title'),
-        'year' => request('year'),
-        'genre' => request('genre'),
-    ];
-
-    return $movies;
-});
-
-
-Route::put('/movie/{id}', function ($id) use ($movies) {
-    $movies[$id]['title'] = request('title');
-    $movies[$id]['year'] = request('year');
-    $movies[$id]['genre'] = request('genre');
-
-    return $movies;
-});
+            return $movies;
+        });
 
 
-Route::patch('/movie/{id}', function ($id) use ($movies) {
-    $movies[$id]['title'] = request('title');
-    $movies[$id]['year'] = request('year');
-    $movies[$id]['genre'] = request('genre');
+        Route::put('/{id}', function ($id) use ($movies) {
+            $movies[$id]['title'] = request('title');
+            $movies[$id]['year'] = request('year');
+            $movies[$id]['genre'] = request('genre');
 
-    return $movies;
-});
+            return $movies;
+        });
 
 
-Route::delete('/movie/{id}', function ($id) use ($movies) {
-    unset($movies[$id]);
+        Route::patch('/{id}', function ($id) use ($movies) {
+            $movies[$id]['title'] = request('title');
+            $movies[$id]['year'] = request('year');
+            $movies[$id]['genre'] = request('genre');
 
-    return $movies;
-});
+            return $movies;
+        });
+
+
+        Route::delete('/{id}', function ($id) use ($movies) {
+            unset($movies[$id]);
+
+            return $movies;
+        });
+    }
+);
+
+
 
 Route::get('/pricing', function () {
     return 'Please, buy a membership';
 });
 
-Route::get('/login', function (){
+Route::get('/login', function () {
     return 'Login page';
 })->name('login');
