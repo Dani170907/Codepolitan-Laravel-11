@@ -15,10 +15,10 @@ class IsAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! $request->authenticated) {
-            return redirect('/login');
+        if (! $request->authenticated) { // Mengecek apakah pengguna sudah terautentikasi
+            return redirect('/login'); // Jika tidak, alihkan ke ruote login
         }
 
-        return $next($request);
+        return $next($request); // Jika sudah, lanjutkan request ke controller/route selanjutnya
     }
 }
