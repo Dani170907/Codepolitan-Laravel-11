@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\MovieController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MovieController;
 
 // Menampilkan halaman welcome sebagai halaman utama
 Route::get('/', function () {
@@ -42,3 +43,7 @@ Route::get('/pricing', function () {
 Route::get('/login', function () {
     return 'Login page';
 })->name('login');
+
+Route::get('/request', function (Request $request) {
+    dd($request);
+});
