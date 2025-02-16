@@ -14,10 +14,11 @@ class MovieController extends Controller
     {
         // Loop untuk membuat 6 data film dan menyimpannya ke dalam properti $movies
         for ($i = 0; $i < 6; $i++) {
-            $this->movies[] = [ // Menambahkan data film ke dalam array $movies
+            $this->movies[] = [
+                // Menambahkan data film ke dalam array $movies
                 'title' => 'Movie Controller ' . $i, // Judul film dengan format "Movie Controller 0", "Movie Controller 1", dst.
-                'year' => '202' . $i,    // Tahun rilis film dengan format "2020", "2021", dst.
-                'genre' => 'Horror',     // Genre film, di sini selalu "Horror"
+                'year' => '202' . $i, // Tahun rilis film dengan format "2020", "2021", dst.
+                'genre' => 'Horror', // Genre film, di sini selalu "Horror"
             ];
         }
     }
@@ -35,14 +36,25 @@ class MovieController extends Controller
     }
 
     // Method untuk menambahkan film baru
-    public function store(Request $request)
+    public function store()
     {
         // Menambahkan film baru ke dalam array $movies
         $this->movies[] = [
-            'title' => $request->input('title'), // Judul film dari request
-            'year' => $request->input('year'),   // Tahun rilis film dari request
-            'genre' => $request->input('genre'), // Genre film dari request
+            'title' => request('title'), // Judul film dari request
+            'year' => request('year'), // Tahun rilis film dari request
+            'genre' => request('genre'), // Genre film dari request
         ];
         return $this->movies; // Mengembalikan daftar film yang telah diperbarui
+    }
+
+    // Method untuk mengupdate data film berdasarkan ID
+    public function update($id)
+    {
+        // Mengupdate judul, tahun, dan genre film berdasarkan ID
+        $this->movies[$id]['title'] = request('title');
+        $this->movies[$id]['year'] = request('year');
+        $this->movies[$id]['genre'] = request('genre');
+
+        return $this->movies[$id]; // Mengembalikan film yang telah diupdate
     }
 }

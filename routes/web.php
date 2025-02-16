@@ -29,6 +29,7 @@ Route::group(
     ],
     function () use ($movies) {
 
+
         // Menampilkan semua film menggunakan method index dari MovieController
         Route::get('/', [MovieController::class, 'index']);
 
@@ -38,23 +39,11 @@ Route::group(
         // Menambahkan film baru menggunakan method store dari MovieController
         Route::post('/', [MovieController::class, 'store']);
 
-        // Mengupdate data film berdasarkan ID
-        Route::put('/{id}', function ($id) use ($movies) {
-            $movies[$id]['title'] = request('title');
-            $movies[$id]['year'] = request('year');
-            $movies[$id]['genre'] = request('genre');
-
-            return $movies;
-        });
+        // Mengupdate data film berdasarkan ID menggunakan method update dari MovieController
+        Route::put('/{id}', [MovieController::class, 'update']);
 
         // Mengupdate sebagian data film berdasarkan ID (mirip dengan PUT)
-        Route::patch('/{id}', function ($id) use ($movies) {
-            $movies[$id]['title'] = request('title');
-            $movies[$id]['year'] = request('year');
-            $movies[$id]['genre'] = request('genre');
-
-            return $movies;
-        });
+        Route::patch('/{id}', [MovieController::class, 'update']);
 
         // Menghapus film berdasarkan ID
         Route::delete('/{id}', function ($id) use ($movies) {
