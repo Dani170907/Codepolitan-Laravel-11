@@ -27,4 +27,22 @@ class MovieController extends Controller
     {
         return $this->movies;
     }
+
+    // Method untuk menampilkan film berdasarkan ID
+    public function show($id)
+    {
+        return $this->movies[$id]; // Mengembalikan film berdasarkan ID
+    }
+
+    // Method untuk menambahkan film baru
+    public function store(Request $request)
+    {
+        // Menambahkan film baru ke dalam array $movies
+        $this->movies[] = [
+            'title' => $request->input('title'), // Judul film dari request
+            'year' => $request->input('year'),   // Tahun rilis film dari request
+            'genre' => $request->input('genre'), // Genre film dari request
+        ];
+        return $this->movies; // Mengembalikan daftar film yang telah diperbarui
+    }
 }
