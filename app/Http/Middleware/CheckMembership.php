@@ -10,8 +10,8 @@ class CheckMembership
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->membership !== true) {
-            return redirect('/pricing'); // Jika bukan member, arahkan ke halaman harga
+        if ($request->input('membership') !== true) {
+            return redirect(to: '/pricing'); // Jika bukan member, arahkan ke halaman harga
         }
 
         // Log sebelum request diproses

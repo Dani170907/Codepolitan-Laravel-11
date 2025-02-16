@@ -8,49 +8,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Inisialisasi array untuk menyimpan daftar film
-$movies = [];
-
-for ($i = 0; $i <= 5; $i++) {
-    // Menambahkan 6 film ke dalam array dengan data statis
-    $movies[] = [
-        'title' => 'Movie ' . $i,
-        'year' => '2020',
-        'genre' => 'Comedy',
-    ];
-}
-
 // Membuat grup route dengan middleware, prefix, dan alias
 Route::group(
     [
-        'middlware' => ['IsAuth'],
+        'middleware' => ['isAuth'],
         'prefix' => 'movie', // Semua rute dalam grup ini akan memiliki prefix 'movie'
         'as' => 'movie.', // Semua rute dalam grup ini akan memiliki alias diawali 'movie.'
     ],
-    function () use ($movies) {
 
+    function () {
 
         // Menampilkan semua film menggunakan method index dari MovieController
         Route::get('/', [MovieController::class, 'index']);
-
         // Menampilkan film berdasarkan ID, tetapi hanya bisa diakses oleh member
-        Route::get('/{id}', [MovieController::class, 'show'])->middleware(['isMember']);
-
+        Route::get('/{id}', [MovieController::class, 'show'])->middleware('isMember');
         // Menambahkan film baru menggunakan method store dari MovieController
         Route::post('/', [MovieController::class, 'store']);
-
         // Mengupdate data film berdasarkan ID menggunakan method update dari MovieController
         Route::put('/{id}', [MovieController::class, 'update']);
-
         // Mengupdate sebagian data film berdasarkan ID (mirip dengan PUT)
         Route::patch('/{id}', [MovieController::class, 'update']);
-
         // Menghapus film berdasarkan ID
-        Route::delete('/{id}', function ($id) use ($movies) {
-            unset($movies[$id]);
-
-            return $movies;
-        });
+        Route::delete('/{id}', [MovieController::class, 'destroy']);
     }
 );
 
