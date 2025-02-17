@@ -36,16 +36,16 @@ Route::group(
 
 // Menampilkan pesan jika pengguna belum berlangganan
 Route::get('/pricing', function () {
-    return 'Please, buy a membership';
+    return 'Please, buy a membership'; // Mengembalikan pesan untuk membeli membership
 });
 
 // Menampilkan halaman login dengan alias 'login'
 Route::get('/login', function () {
-    return 'Login page';
-})->name('login');
+    return 'Login page'; // Mengembalikan halaman login
+})->name('login'); // Alias: login
 
+// Contoh route untuk menangani request dan mengembalikan nama pengguna
 Route::get('/request', function (Request $request) {
-    if ($request->is('request')) {
-        return true;
-    }
+    $user = $request; // Mengambil objek request
+    return $user->name; // Mengembalikan nilai properti 'name' dari request
 });
