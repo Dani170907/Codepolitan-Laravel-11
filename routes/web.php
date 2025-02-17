@@ -46,6 +46,9 @@ Route::get('/login', function () {
 
 // Contoh route untuk menangani request dan mengembalikan nama pengguna
 Route::get('/request', function (Request $request) {
-    $user = $request; // Mengambil objek request
-    return $user->name; // Mengembalikan nilai properti 'name' dari request
+    $filtered = $request->collect()->map(function ($value) {
+        return strtoupper($value);
+    });
+
+    return $filtered;
 });
