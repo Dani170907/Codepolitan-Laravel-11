@@ -46,38 +46,44 @@ Route::get('/login', function () {
 
 
 Route::post('/request', function (Request $request) {
+    // Contoh penggunaan method input() untuk mengambil semua input dari request
     // $input = $request->input();
     // return $input;
 
+    // Contoh penggunaan method input() untuk mengambil array colors.* dari request
     // $input = $request->input('colors.*');
     // return $input;
 
-
+    // Contoh penggunaan method query() untuk mengambil parameter query string 'gender'
     // $query = $request->query('gender');
     // return $query;
 
+    // Contoh penggunaan method date() untuk mengambil dan memformat tanggal dari request
     // $data = $request->date('schedule', 'Y-m-d', 'Asia/Jakarta')
     // // ->addDays()
     // // ->addMinutes(30)
     // // ->addHours(3)
     // ;
-
     // return $data->diffForHumans();
 
+    // Contoh penggunaan method has() untuk memeriksa apakah request memiliki input 'email' dan 'password'
     // if ($request->has('email', 'password')) {
     //     return "Berhasil Login";
     // }
 
+    // Contoh penggunaan method hasAny() untuk memeriksa apakah request memiliki salah satu dari input 'email' atau 'password'
     // if ($request->hasAny('email', 'password')) {
     //     return "Berhasil Login";
     // }
 
+    // Contoh penggunaan method merge() untuk menambahkan atau mengganti nilai input request
     $request->merge(['email' => 'kezia@gmail.com']);
 
+    // Contoh penggunaan method missing() untuk memeriksa apakah request tidak memiliki input 'email' atau 'password'
     if ($request->missing('email', 'password')) {
-        return "Emailnya/password tidak ada";
+        return "Emailnya/password tidak ada"; // Mengembalikan pesan jika email atau password tidak ada
     } else {
-        return "Datanya Lengkap";
+        return "Datanya Lengkap"; // Mengembalikan pesan jika email dan password ada
     }
     // return 'Gagal';
 });
