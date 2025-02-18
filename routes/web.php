@@ -91,3 +91,18 @@ Route::post('/request', function (Request $request) {
 Route::get('/response', function () {
     return response('OK', 200)->header('Content-Type', 'text/plain');
 });
+
+Route::get('/cache-control', function () {
+    return Response::make('page allow to cache', 200)
+    ->header('Chace-Control', 'public, max-age=86400');
+});
+
+Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function () {
+    Route::get('/privacy', function () {
+        return "Privacy page";
+    });
+
+    Route::get('/terms', function () {
+        return "Terms page";
+    });
+});
