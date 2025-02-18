@@ -44,11 +44,11 @@ Route::get('/login', function () {
     return 'Login page'; // Mengembalikan halaman login
 })->name('login'); // Alias: login
 
-// Contoh route untuk menangani request dan mengembalikan nama pengguna
-Route::get('/request', function (Request $request) {
-    $filtered = $request->collect()->map(function ($value) {
-        return strtoupper($value);
-    });
 
-    return $filtered;
+Route::post('/request', function (Request $request) {
+    // $input = $request->input('colors.*');
+    // return $input;
+
+    $query = $request->query('gender');
+    return $query;
 });
