@@ -82,3 +82,6 @@ Route::post('/request', function (Request $request) {
     // return 'Gagal';
 });
 
+Route::get('/response', function () {
+    return response('OK', 200)->header('Content-Type', 'text/plain');
+});
