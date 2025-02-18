@@ -98,6 +98,13 @@ Route::get('/cache-control', function () {
 });
 
 Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function () {
+
+    Route::get('/dashboard', function () {
+        $user = "Kezia";
+
+        return response('login successfully', status: 200)->cookie('user', $user);
+    });
+
     Route::get('/privacy', function () {
         return "Privacy page";
     });
