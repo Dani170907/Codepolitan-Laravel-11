@@ -99,6 +99,10 @@ Route::get('/cache-control', function () {
 
 Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function () {
 
+    Route::get('/home', function () {
+        return "Home dari halaman" . request()->sourceUrl;
+    })->name('home');
+
     Route::get('/dashboard', function () {
         $user = "Kezia";
 
@@ -106,7 +110,7 @@ Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function (
     });
 
     Route::get('/logout', function () {
-        return response('logout successfully', 200)->withoutCookie('user');
+        return redirect()->route('home', ['sourceUrl' => 'logout'])->withoutCookie('user');
     });
 
     Route::get('/privacy', function () {
