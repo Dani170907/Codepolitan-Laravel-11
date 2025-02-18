@@ -68,10 +68,17 @@ Route::post('/request', function (Request $request) {
     //     return "Berhasil Login";
     // }
 
-    if ($request->hasAny('email', 'password')) {
-        return "Berhasil Login";
-    }
+    // if ($request->hasAny('email', 'password')) {
+    //     return "Berhasil Login";
+    // }
 
-    return 'Gagal';
+    $request->merge(['email' => 'kezia@gmail.com']);
+
+    if ($request->missing('email', 'password')) {
+        return "Emailnya/password tidak ada";
+    } else {
+        return "Datanya Lengkap";
+    }
+    // return 'Gagal';
 });
 
