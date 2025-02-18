@@ -25,20 +25,16 @@ class MovieController extends Controller
     }
 
     // Method untuk mengembalikan semua data film
-    public function index()
-    {
-        // Mengembalikan response JSON yang berisi daftar film dan pesan
-        return response()->json([
-            'movies' => $this->movies,
-            'message' => 'List of Movies',
-        ], 200);
+    public function index() {
+        return view('movies.index');
     }
 
     // Method untuk menampilkan film berdasarkan ID
     public function show($id)
     {
         // Mengembalikan film berdasarkan ID yang diberikan
-        return $this->movies[$id];
+        // return $this->movies[$id];
+        return view('movies.show');
     }
 
     // Method untuk menambahkan film baru
@@ -78,6 +74,3 @@ class MovieController extends Controller
     }
 }
 
-Route::get('dashboard', function () {
-    
-});

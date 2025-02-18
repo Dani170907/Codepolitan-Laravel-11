@@ -17,7 +17,7 @@ Route::get('/home', function (){
 // Membuat grup route dengan middleware, prefix, dan alias
 Route::group(
     [
-        'middleware' => ['isAuth'],
+        // 'middleware' => ['isAuth'],
         'prefix' => 'movie', // Semua rute dalam grup ini akan memiliki prefix 'movie'
         'as' => 'movie.', // Semua rute dalam grup ini akan memiliki alias diawali 'movie.'
     ],
@@ -27,7 +27,9 @@ Route::group(
         // Menampilkan semua film menggunakan method index dari MovieController
         Route::get('/', [MovieController::class, 'index']);
         // Menampilkan film berdasarkan ID, tetapi hanya bisa diakses oleh member
-        Route::get('/{id}', [MovieController::class, 'show'])->middleware('isMember');
+        Route::get('/{id}', [MovieController::class, 'show'])
+            // ->middleware('isMember')
+            ;
         // Menambahkan film baru menggunakan method store dari MovieController
         Route::post('/', [MovieController::class, 'store']);
         // Mengupdate data film berdasarkan ID menggunakan method update dari MovieController
