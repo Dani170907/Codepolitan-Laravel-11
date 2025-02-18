@@ -49,6 +49,15 @@ Route::post('/request', function (Request $request) {
     // $input = $request->input('colors.*');
     // return $input;
 
-    $query = $request->query('gender');
-    return $query;
+    // $query = $request->query('gender');
+    // return $query;
+
+    $data = $request->date('schedule', 'Y-m-d', 'Asia/Jakarta')
+    // ->addDays()
+    // ->addMinutes(30)
+    // ->addHours(3)
+    ;
+
+    return $data->diffForHumans();
 });
+
