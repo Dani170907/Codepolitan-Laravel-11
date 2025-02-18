@@ -46,18 +46,32 @@ Route::get('/login', function () {
 
 
 Route::post('/request', function (Request $request) {
+    // $input = $request->input();
+    // return $input;
+
     // $input = $request->input('colors.*');
     // return $input;
+
 
     // $query = $request->query('gender');
     // return $query;
 
-    $data = $request->date('schedule', 'Y-m-d', 'Asia/Jakarta')
-    // ->addDays()
-    // ->addMinutes(30)
-    // ->addHours(3)
-    ;
+    // $data = $request->date('schedule', 'Y-m-d', 'Asia/Jakarta')
+    // // ->addDays()
+    // // ->addMinutes(30)
+    // // ->addHours(3)
+    // ;
 
-    return $data->diffForHumans();
+    // return $data->diffForHumans();
+
+    // if ($request->has('email', 'password')) {
+    //     return "Berhasil Login";
+    // }
+
+    if ($request->hasAny('email', 'password')) {
+        return "Berhasil Login";
+    }
+
+    return 'Gagal';
 });
 
