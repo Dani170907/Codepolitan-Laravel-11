@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
@@ -7,6 +8,10 @@ use App\Http\Controllers\MovieController;
 // Menampilkan halaman welcome sebagai halaman utama
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/home', function (){
+    return view('home');
 });
 
 // Membuat grup route dengan middleware, prefix, dan alias
@@ -99,9 +104,7 @@ Route::get('/cache-control', function () {
 
 Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function () {
 
-    Route::get('/home', function () {
-        return "Home dari halaman" . request()->sourceUrl;
-    })->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get('/dashboard', function () {
         $user = "Kezia";
@@ -110,7 +113,7 @@ Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function (
     });
 
     Route::get('/logout', function () {
-        return redirect()->route('home', ['sourceUrl' => 'logout'])->withoutCookie('user');
+        return redirect()->action([HomeController::class, 'index'], ['authenticated' => false]);
     });
 
     Route::get('/privacy', function () {
@@ -120,4 +123,8 @@ Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function (
     Route::get('/terms', function () {
         return "Terms page";
     });
+});
+
+Route::get('/external', function () {
+    return redirect()->away('https://laravel.com');
 });
