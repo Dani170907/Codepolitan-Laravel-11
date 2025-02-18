@@ -26,15 +26,15 @@ class MovieController extends Controller
 
     // Method untuk mengembalikan semua data film
     public function index() {
-        return view('movies.index');
+        $movies = $this->movies;
+        return view('movies.index', ['movies' => $movies]);
     }
 
     // Method untuk menampilkan film berdasarkan ID
     public function show($id)
     {
-        // Mengembalikan film berdasarkan ID yang diberikan
-        // return $this->movies[$id];
-        return view('movies.show');
+        $movie =  $this->movies[$id];
+        return view('movies.show', ['movie' => $movie]);
     }
 
     // Method untuk menambahkan film baru
