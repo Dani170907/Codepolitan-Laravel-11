@@ -17,19 +17,26 @@
     Profile
     <li>Name: {{ $user['name'] }}</li>
     <li>Email: {{ $user['email'] }}</li>
-    @switch($movieCategory)
-        @case('action')
-            <h4>Action Movies</h4>
-            @break
-        @case('comedy')
-            <h4>Comedy Movies</h4>
-            @break
-        @case('drama')
-            <h4>Drama Movies</h4>
-            @break
-        @default
-            <h4>Other Movies</h4>
-    @endswitch
-    </li>
+
+
+    {{-- <ul>
+        @for ($index = 0; $index < count($movies); $index++)
+        <li>{{ $movies[$index]['title'] . ' - ' . $movies[$index]['year']}}</li>
+        @endfor
+    </ul> --}}
+
+    {{-- <ol>
+        @foreach ($movies as $movie)
+            <li>{{ $movie['title'] . ' - ' . $movie['year'] }}</li>
+        @endforeach
+    </ol> --}}
+
+    <ol>
+        @forelse ($movies as $movie)
+            <li>{{ $movie['title'] . ' - ' . $movie['year'] }}</li>
+        @empty
+            <li>Not found</li>
+        @endforelse
+    </ol>
 </body>
 </html>

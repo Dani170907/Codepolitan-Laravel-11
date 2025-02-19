@@ -17,7 +17,13 @@ class HomeController extends Controller
             'role' => 'admin',
         ];
 
-        $movieCategory = '';
-        return view('/home', compact('user', 'movieCategory'));
+        $movies = [
+            ['title' => 'The Matrix', 'year' => 1999],
+            ['title' => 'Inception', 'year' => 2010],
+            ['title' => 'Interstellar', 'year' => 2014],
+            ['title' => 'The Dark Knight', 'year' => 2008],
+        ];
+
+        return view('/home', compact('user', 'movies'));
     }
 }
