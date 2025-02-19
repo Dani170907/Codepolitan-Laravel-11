@@ -7,7 +7,7 @@
     <title>Movie</title>
 </head>
 <body>
-    <h1>Movies</h1>
+    <h1>{{ $titlePage }}</h1>
     {{ dd($movies) }}
 </body>
 </html>
