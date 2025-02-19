@@ -11,6 +11,11 @@ class HomeController extends Controller
     {
         // Mengembalikan nilai properti 'authenticated' dari request
         // return response(request()->authenticated);
-        return view('/home');
+        $user = [
+            'name' => 'Kezi',
+            'email' => '1@b.com',
+            'role' => '',
+        ];
+        return view('/home', compact('user'));
     }
 }

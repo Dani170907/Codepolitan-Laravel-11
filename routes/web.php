@@ -10,10 +10,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function (){
-    return view('home');
-});
-
 // Membuat grup route dengan middleware, prefix, dan alias
 Route::group(
     [
