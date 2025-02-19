@@ -17,10 +17,19 @@
     Profile
     <li>Name: {{ $user['name'] }}</li>
     <li>Email: {{ $user['email'] }}</li>
-    <li>Role: {{
-        $user['role'] == 'admin' ? 'Administrator' :
-        ($user['role'] == 'user' ? 'User' : 'Unknown')
-    }}
+    @switch($movieCategory)
+        @case('action')
+            <h4>Action Movies</h4>
+            @break
+        @case('comedy')
+            <h4>Comedy Movies</h4>
+            @break
+        @case('drama')
+            <h4>Drama Movies</h4>
+            @break
+        @default
+            <h4>Other Movies</h4>
+    @endswitch
     </li>
 </body>
 </html>

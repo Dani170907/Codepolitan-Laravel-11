@@ -14,8 +14,10 @@ class HomeController extends Controller
         $user = [
             'name' => 'Kezi',
             'email' => '1@b.com',
-            'role' => '',
+            'role' => 'admin',
         ];
-        return view('/home', compact('user'));
+
+        $movieCategory = '';
+        return view('/home', compact('user', 'movieCategory'));
     }
 }
