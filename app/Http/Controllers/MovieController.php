@@ -30,7 +30,7 @@ class MovieController extends Controller
         $movies = $this->movies;
         // return view('movies.index', ['movies' => $movies]);
         return view('movies.index', compact('movies'))->with([
-            'titlePage' => 'Movie List'
+            'titlePage' => 'Movie List',
         ]);
     }
 
