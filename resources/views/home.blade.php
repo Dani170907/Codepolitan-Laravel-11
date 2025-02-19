@@ -25,6 +25,21 @@
         @endfor
     </ul> --}}
 
+        @foreach ($movies as $movie)
+
+            {{-- <p>{{ $loop->iteration }}. {{ $movie['title'] . ' - ' . $movie['year'] }}</p> --}}
+            {{-- @if($loop->first)
+                <h4>First Movie: {{ $movie['title'] . ' - ' . $movie['year'] }}</h4>
+            @elseif ($loop->last)
+                <h4>Last Movie: {{ $movie['title'] . ' - ' . $movie['year'] }}</h4>
+            @else
+                <h4>{{ $movie['title'] . ' - ' . $movie['year'] }}</h4>
+            @endif --}}
+
+            <p>Movie: {{ $loop->iteration }} of {{ $loop->count }}: {{ $movie['title'] }} - {{ $movie['year'] }}</p>
+        @endforeach
+
+{{--
     <ol>
         @foreach ($movies as $movie)
             @if($movie['year'] < 2000)
@@ -36,7 +51,7 @@
             @endif
             <li>{{ $movie['title'] . ' - ' . $movie['year'] }}</li>
         @endforeach
-    </ol>
+    </ol> --}}
 
     {{-- <ol>
         @forelse ($movies as $movie)
