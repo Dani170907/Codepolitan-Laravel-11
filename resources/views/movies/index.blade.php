@@ -7,6 +7,14 @@
     <title>Movie</title>
 </head>
 <body>
+    <ul>
+        <?php foreach ($menu as $key => $value) : ?>
+        <li><a href="<?= $value ?>"><?= $key ?></a></li>
+        <?php endforeach ?>
+    </ul>
+
+    {{ dd($config) }}
+
     <h1>{{ $titlePage }}</h1>
     {{ dd($movies) }}
 </body>

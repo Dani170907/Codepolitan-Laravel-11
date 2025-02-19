@@ -8,6 +8,11 @@
 </head>
 <body>
     <h1>Movie</h1>
+    <ul>
+        <?php foreach ($menu as $key => $value) : ?>
+            <li><a href="<?= $value ?>"><?= $key ?></a></li>
+        <?php endforeach ?>
+    </ul>
     {{ dd($movie) }}
 </body>
 </html>
