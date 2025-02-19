@@ -25,18 +25,25 @@
         @endfor
     </ul> --}}
 
-    {{-- <ol>
+    <ol>
         @foreach ($movies as $movie)
+            @if($movie['year'] < 2000)
+                @continue
+            @endif
+
+            @if($movie['year'] > 2018)
+                @break
+            @endif
             <li>{{ $movie['title'] . ' - ' . $movie['year'] }}</li>
         @endforeach
-    </ol> --}}
+    </ol>
 
-    <ol>
+    {{-- <ol>
         @forelse ($movies as $movie)
             <li>{{ $movie['title'] . ' - ' . $movie['year'] }}</li>
         @empty
             <li>Not found</li>
         @endforelse
-    </ol>
+    </ol> --}}
 </body>
 </html>
