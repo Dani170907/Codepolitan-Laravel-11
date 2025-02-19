@@ -20,10 +20,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::share('menu', [
-            'Home' => '/',
-            'About' => '/about',
-            'Contact' => '/contact',
-        ]);
+        // View::share('menu', [
+        //     'Home' => '/',
+        //     'About' => '/about',
+        //     'Contact' => '/contact',
+        // ]);
+
+        View::composer(['movies.index', 'movies.show'], function ($view) {
+            $view->with('menu', [
+                'Home' => '/',
+                'About' => '/about',
+                'Contact' => '/contact',
+            ]);
+        });
     }
 }

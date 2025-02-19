@@ -13,8 +13,6 @@
         <?php endforeach ?>
     </ul>
 
-    {{ dd($config) }}
-
     <h1>{{ $titlePage }}</h1>
     {{ dd($movies) }}
 </body>
